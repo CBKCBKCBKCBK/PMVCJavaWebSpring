@@ -28,7 +28,7 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 	background-attachment: fixed;
 	background-size: cover;
 	background-color: white;">
-<%--body--%>
+	
 <nav class="navbar navbar-expand-sm navbar-light bg-light" style="background-color: #e9ecef;">
   <a class="navbar-brand" href="/index">資料庫編輯系統</a>
   

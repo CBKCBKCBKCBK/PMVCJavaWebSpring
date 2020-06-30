@@ -27,6 +27,7 @@ import tw.com.pcschool.web.service.UserService;
 
 @Controller
 public class UserController {
+	
 	@Autowired
 	private UserService userService;
 	
@@ -36,9 +37,9 @@ public class UserController {
 		return "welcomepage";
 	}
 	
-	@RequestMapping("/welcome")
+	@RequestMapping("/mainpage")
 	public String welcome(HttpServletRequest request) {
-		request.setAttribute("users", userService.showAllUsers());
+		request.setAttribute("users", userService.query());
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
 	}
@@ -53,7 +54,7 @@ public class UserController {
 	
 	@PostMapping("/update")
 	public String update(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("user", userService.showUser(id));
+		request.setAttribute("user", userService.get(id));
 		request.setAttribute("mode", "MODE_UPDATE");
 		return "welcomepage";
 	}
@@ -73,7 +74,7 @@ public class UserController {
 			return "welcomepage";
 		}
 		userService.add(user);
-		request.setAttribute("users", userService.showAllUsers());
+		request.setAttribute("users", userService.query());
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
 	}
@@ -90,8 +91,8 @@ public class UserController {
 			request.setAttribute("mode", "MODE_UPDATE");
 			return "welcomepage";
 		}
-		userService.saveMyUser(user);
-		request.setAttribute("users", userService.showAllUsers());
+		userService.update(user);
+		request.setAttribute("users", userService.query());
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
 	}
@@ -104,12 +105,13 @@ public class UserController {
 		} catch (DataIntegrityViolationException e) {
 			request.setAttribute("deleteid", id);
 			request.setAttribute("foreignerror", "該使用者有訂單尚未刪除");
-			request.setAttribute("users", userService.showAllUsers());
+			request.setAttribute("users", userService.query());
 			request.setAttribute("mode", "MODE_HOME");
 			return "welcomepage";
 		}
-		request.setAttribute("users", userService.showAllUsers());
+		request.setAttribute("users", userService.query());
 		request.setAttribute("mode", "MODE_HOME");
 		return "welcomepage";
 	}
+	
 }
