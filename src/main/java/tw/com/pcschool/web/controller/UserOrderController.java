@@ -23,8 +23,23 @@ import tw.com.pcschool.web.service.UserOrderService;
 @Controller
 @RequestMapping("/order")
 public class UserOrderController {
+	
 	@Autowired
 	private UserOrderService orderService;
+	
+	@PostMapping("/queryorder")
+	public String queryOrder(@RequestParam Long id,HttpServletRequest request) {
+		request.setAttribute("orders", orderService.queryOrderByUserId(id));
+		request.setAttribute("mode", "MODE_LISTORDER");
+		return "welcomepage";
+	}
+	
+	@RequestMapping("/list")
+	public String listOrder(HttpServletRequest request) {
+		request.setAttribute("orders", orderService.list());
+		request.setAttribute("mode", "MODE_LISTORDER");
+		return "welcomepage";
+	}
 	
 	@PostMapping("/add")
 	public String addOrder(@RequestParam Long id,HttpServletRequest request) {
@@ -39,41 +54,29 @@ public class UserOrderController {
 		return "welcomepage";
 	}
 	
-	@RequestMapping("/index")
-	@ResponseBody
-	public String index(HttpServletRequest request) {
-		request.setAttribute("mode", "MODE_TEST");
+	@PostMapping("/update")
+	public String update(@RequestParam Long id,HttpServletRequest request) {
+		request.setAttribute("order", orderService.get(id));
+		request.setAttribute("mode", "MODE_UPDATEORDER");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/saveorder")
 	public String saveOrder(@Valid@ModelAttribute("order") UserOrder order
 			,BindingResult bindingResult,HttpServletRequest request) {
-		
-		
 		if (bindingResult.hasErrors()) {
-			LogManager.getLogger().error(bindingResult.getAllErrors());
 			if (order.getOrderDate()!=null) {
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 				Date date= java.sql.Date.valueOf(sdf.format(order.getOrderDate()));
 				order.setOrderDate(date);
 			}
-			
 			request.setAttribute("order", order);
 			request.setAttribute("mode", "MODE_ADDORDER");
 			return "welcomepage";
 		}
-		
 		orderService.save(order);
 		request.setAttribute("orders", orderService.list());
 		request.setAttribute("mode", "MODE_LISTORDER");
-		return "welcomepage";
-	}
-	
-	@PostMapping("/update")
-	public String update(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("order", orderService.get(id));
-		request.setAttribute("mode", "MODE_UPDATEORDER");
 		return "welcomepage";
 	}
 	
@@ -104,18 +107,4 @@ public class UserOrderController {
 		return "welcomepage";
 	}
 	
-	@RequestMapping("/list")
-	public String listOrder(HttpServletRequest request) {
-		request.setAttribute("orders", orderService.list());
-		request.setAttribute("mode", "MODE_LISTORDER");
-		return "welcomepage";
-	}
-	
-	
-	@PostMapping("/queryorder")
-	public String queryOrder(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("orders", orderService.queryOrderByUserId(id));
-		request.setAttribute("mode", "MODE_LISTORDER");
-		return "welcomepage";
-	}
 }

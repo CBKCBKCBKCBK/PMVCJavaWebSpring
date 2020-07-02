@@ -39,13 +39,13 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <div class="collapse navbar-collapse" id="navbarSupportedContent" "><%--隱藏按鈕 --%>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/welcome">首頁 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/mainpage">首頁 <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/register">新增用戶</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/welcome">所有用戶</a>
+        <a class="nav-link" href="/mainpage">所有用戶</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/order/list">所有訂單</a>

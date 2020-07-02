@@ -1,57 +1,21 @@
 package tw.com.pcschool.web.service;
 
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import tw.com.pcschool.web.model.User;
-import tw.com.pcschool.web.repository.UserRepository;
 
-@Service
-@Transactional
-public class UserService {
+
+public interface UserService {
 	
-	@Autowired
-	private UserRepository userRepository;
+	public void add(User entity);
 	
-	public UserService(UserRepository userRepository) {
-		this.userRepository=userRepository;
-	}
+	public User get(Long id);
 	
-	public void add(User entity) {
-		Date date=new Timestamp(System.currentTimeMillis());
-		entity.setTimeBuild(date);
-		entity.setTimeModify(date);
-		userRepository.save(entity);
-	}
+	public boolean exists(Long id);
 	
-	public User get(Long id) {
-		return userRepository.findById(id).get();
-	}
+	public List<User> query();
 	
-	public boolean exists(Long id) {
-		return userRepository.existsById(id);
-	}
+	public void delete(Long id);
 	
-	public List<User> query() {
-		List<User> list=new ArrayList<User>();
-		userRepository.findAll().forEach(data->list.add(data));
-		return list;
-	}
-	
-	public void delete(Long id) {
-		userRepository.deleteById(id);
-	}
-	
-	public void update(User user) {
-		user.setTimeBuild(userRepository.findById(user.getId()).get().getTimeBuild());
-		user.setTimeModify(new Date(System.currentTimeMillis()));
-		userRepository.save(user);
-	}	
-	
+	public void update(User user);
 }
