@@ -73,5 +73,5 @@
 
 </div>
 <script src="/js/jquery/jquery-ui.min.js"></script>
-<script src="/js/jquery/datepicker-zh-TW.js"></script>
 <script src="/js/self/datepicker.js"></script>
+<script src="/js/jquery/datepicker-zh-TW.js"></script>

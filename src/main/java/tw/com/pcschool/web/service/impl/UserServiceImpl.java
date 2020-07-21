@@ -1,6 +1,5 @@
 package tw.com.pcschool.web.service.impl;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	public void add(User entity) {
-		Date date=new Timestamp(System.currentTimeMillis());
+		Date date=new Date();
 		entity.setTimeBuild(date);
 		entity.setTimeModify(date);
 		userRepository.save(entity);
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService{
 	
 	public List<User> query() {
 		List<User> list=new ArrayList<User>();
-		userRepository.findAll().forEach(data->list.add(data));
+		userRepository.findAll().forEach(list::add);
 		return list;
 	}
 	
@@ -51,7 +50,7 @@ public class UserServiceImpl implements UserService{
 	
 	public void update(User user) {
 		user.setTimeBuild(userRepository.findById(user.getId()).get().getTimeBuild());
-		user.setTimeModify(new Date(System.currentTimeMillis()));
+		user.setTimeModify(new Date());
 		userRepository.save(user);
 	}	
 	

@@ -1,20 +1,16 @@
 package tw.com.pcschool.web.service.impl;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import tw.com.pcschool.web.model.User;
 import tw.com.pcschool.web.model.UserOrder;
 import tw.com.pcschool.web.repository.UserOrderRepository;
-import tw.com.pcschool.web.repository.UserRepository;
 import tw.com.pcschool.web.service.UserOrderService;
 
 @Service
@@ -27,14 +23,14 @@ public class UserOrderServiceImpl implements UserOrderService{
 		this.orderRepository=orderRepository;
 	}
 	public void save(UserOrder entity) {
-		Date date=new Timestamp(System.currentTimeMillis());
+		Date date=new Date();
 		entity.setTimeBuild(date);
 		entity.setTimeModify(date);
 		orderRepository.save(entity);
 	}
 	public void update(UserOrder entity) {
-		Date date=new Timestamp(System.currentTimeMillis());
-		entity.setTimeBuild(orderRepository.findById(entity.getOrder_id()).get().getTimeBuild());
+		Date date=new Date();
+		entity.setTimeBuild(orderRepository.findById(entity.getId()).get().getTimeBuild());
 		entity.setTimeModify(date);
 		orderRepository.save(entity);
 	}
@@ -53,7 +49,7 @@ public class UserOrderServiceImpl implements UserOrderService{
 		list=list.stream().filter(e->e.getId_user().getId().equals(id))
 				.collect(Collectors.toList());
 		return list;
-	}
+	}	
 	
 	public List<UserOrder> list() {
 		List<UserOrder> list=new ArrayList<UserOrder>();

@@ -66,10 +66,10 @@ public class User {
 	@NotNull(message = "此欄位必填")
 	private Date birthday;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "timebuild",nullable = false)
+	@Column(name = "time_build",nullable = false)
 	private Date timeBuild;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="timemodify",nullable = false)
+	@Column(name="time_modify",nullable = false)
 	private Date timeModify;
 	@Override
 	public String toString() {

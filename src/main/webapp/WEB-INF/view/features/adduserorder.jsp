@@ -10,10 +10,10 @@
 		<form:form action="saveorder" method="post" modelAttribute="order"
 			class="form-horizontal">
 			
-			<input type="hidden" name="id" value="${order.order_id }">
+			<input type="hidden" name="id" value="${order.id }">
 			<div class="row form-group">
 				<div class="col text-left align-self-start">使用者ID:</div>
-				<form:input path="id_user" type="text" name="userid" readonly="true"
+				<form:input path="id_user" type="text" name="id_user" readonly="true"
 					value="${order.id_user.id }" cssClass="form-control align-self-end"
 					cssStyle="width:64rem;" />
 				

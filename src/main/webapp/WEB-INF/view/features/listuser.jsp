@@ -62,4 +62,4 @@
 	</div>
 </div>
 
-<script src="js/self/listuser.js"></script>
+<script src="/js/self/listuser.js"></script>

@@ -24,7 +24,7 @@
 			<tbody>
 				<c:forEach var="order" items="${orders }">
 					<tr>
-						<td>${order.order_id }</td>
+						<td>${order.id }</td>
 						<td>${order.id_user.id }</td>
 						<td>${order.orderName }</td>
 						<td><fmt:formatDate value="${order.orderDate }" pattern="yyyy年MM月dd日"/></td>
@@ -33,10 +33,10 @@
 						<td><fmt:formatDate value="${order.timeModify }" pattern="yyyy年MM月dd日"/><br>
 						<fmt:formatDate value="${order.timeModify }" pattern="hh時mm分ss秒"/></td>
 						<td><form action="update" method="post">
-						<input type="hidden" name="id" value="${order.order_id }">
+						<input type="hidden" name="id" value="${order.id }">
 						<button class="btn btn-warning" type="submit">編輯</button></form></td>
 						<td><form action="delete" method="post">
-						<input type="hidden" name="id" value="${order.order_id }">
+						<input type="hidden" name="id" value="${order.id }">
 						<button class="btn btn-danger" type="submit">刪除</button></form></td>
 					</tr>
 				</c:forEach>
@@ -45,4 +45,4 @@
 	</div>
 </div>
 
-<script src="js/self/listuser.js"></script>
+<script src="/js/self/listuser.js"></script>

@@ -21,7 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class UserOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long order_id;
+	private Long id;
 	@ManyToOne
 	@JoinColumn(name = "id_user", nullable = false)
 	private User id_user;
@@ -40,7 +40,7 @@ public class UserOrder {
 	private Date timeModify;
 	@Override
 	public String toString() {
-		return "UserOrder [order_id=" + order_id + ", id_user=" + id_user + ", orderDate=" + orderDate + ", orderName="
+		return "UserOrder [id=" + id + ", id_user=" + id_user + ", orderDate=" + orderDate + ", orderName="
 				+ orderName + ", timeBuild=" + timeBuild + ", timeModify=" + timeModify + "]";
 	}
 	public UserOrder() {
@@ -55,11 +55,11 @@ public class UserOrder {
 		this.timeBuild = timeBuild;
 		this.timeModify = timeModify;
 	}
-	public Long getOrder_id() {
-		return order_id;
+	public Long getId() {
+		return id;
 	}
-	public void setOrder_id(Long order_id) {
-		this.order_id = order_id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public User getId_user() {
 		return id_user;
