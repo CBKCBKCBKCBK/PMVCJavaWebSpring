@@ -1,9 +1,10 @@
 <h1 align="center">簡易表格 操作系統</h1>
 <br>
-<div align="center">專案網址：</div>
+<div align="center">專案網址：</div>
 <div align="center">https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring</div>
 <br><br><br>
 <h2 align="center">系統架構</h2>
+
 
 
 &nbsp; | 程式 | 說明 | 開發工具
@@ -17,3 +18,13 @@
 &nbsp; | &rarr;&nbsp;Service | 從DAO(Repository)取得必要資料並處理業務邏輯，<br>並將處理好的資料送往 Controller。 | &nbsp;
 &nbsp; | &rarr;&nbsp;DAO | 從資料庫取得資料並轉換為Bean實體，供其他層別使⽤。 | &nbsp;
 資料庫 | <img src="https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring/blob/master/readme_resources/MySQL.jpg" width="30" height="30">&nbsp;MySQL | 存放表格資料，與網站系統後端做連結。 | <img src="https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring/blob/master/readme_resources/MySQL_WB.jpg" width="30" height="30">&nbsp;MySQL Workbench
+
+
+<h2 align="center">主畫面</h2>
+<img src="https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring/blob/master/readme_resources/listuser.jpg">
+<h2 align="center">新增使用者</h2>
+<img src="https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring/blob/master/readme_resources/adduser.jpg">
+<h2 align="center">所有訂單</h2>
+<img src="https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring/blob/master/readme_resources/listorder.jpg">
+<h2 align="center">新增訂單</h2>
+<img src="https://github.com/CBKCBKCBKCBK/PMVCJavaWebSpring/blob/master/readme_resources/addorder.jpg">
