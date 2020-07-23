@@ -31,3 +31,7 @@ build/
 .vscode/
 note.txt
 Practice.java
+EncrypDES.java
+GenKey.java
+keygen.bin
+ReadDes.java
