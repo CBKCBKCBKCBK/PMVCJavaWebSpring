@@ -3,12 +3,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<div class="container text-center"
-	style="background-color: #e9ecef; padding: 0 0 100% 0; max-width: unset;">
+<div class="container text-center">
 	
 	<h3>用戶註冊</h3>
 
-	<div class="container" style="">
+	<div class="container">
 		<form:form action="saveuser" method="post" modelAttribute="user"
 			class="form-horizontal">
 			

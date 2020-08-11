@@ -1,0 +1,25 @@
+body {
+	background-color: white;
+	background: url(/img/database_bg.jpg);
+	opacity: 0.95;
+	z-index: -999;
+	background-position: center 0;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: white;
+}
+body>nav{
+	background-color: #e9ecef;
+}
+
+body>div.container{
+	background-color: #e9ecef; 
+	padding: 0 0 100% 0; 
+	max-width: unset;
+}
+
+
+.custom-container{max-width: unset;}
+.error-color{color:red}
+.custom-align{display: inline;}

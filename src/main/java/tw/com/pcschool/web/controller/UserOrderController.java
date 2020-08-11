@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,82 +29,82 @@ public class UserOrderController {
 	private UserOrderService orderService;
 	
 	@PostMapping("/queryorder")
-	public String queryOrder(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("orders", orderService.queryOrderByUserId(id));
-		request.setAttribute("mode", "MODE_LISTORDER");
+	public String queryOrder(@RequestParam Long id,Model model) {
+		model.addAttribute("orders", orderService.queryOrderByUserId(id));
+		model.addAttribute("location", "features/listuserorder.jsp");
 		return "welcomepage";
 	}
 	
 	@RequestMapping("/list")
-	public String listOrder(HttpServletRequest request) {
-		request.setAttribute("orders", orderService.list());
-		request.setAttribute("mode", "MODE_LISTORDER");
+	public String listOrder(Model model) {
+		model.addAttribute("orders", orderService.list());
+		model.addAttribute("location", "features/listuserorder.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/add")
-	public String addOrder(@RequestParam Long id,HttpServletRequest request) {
+	public String addOrder(@RequestParam Long id,Model model) {
 		UserOrder order=new UserOrder();
 		User user= new User();
 		
 		user.setId(id);
 		order.setId_user(user);
 		
-		request.setAttribute("order", order);
-		request.setAttribute("mode", "MODE_ADDORDER");
+		model.addAttribute("order", order);
+		model.addAttribute("location", "features/adduserorder.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/update")
-	public String update(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("order", orderService.get(id));
-		request.setAttribute("mode", "MODE_UPDATEORDER");
+	public String update(@RequestParam Long id,Model model) {
+		model.addAttribute("order", orderService.get(id));
+		model.addAttribute("location", "features/updateuserorder.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/saveorder")
 	public String saveOrder(@Valid@ModelAttribute("order") UserOrder order
-			,BindingResult bindingResult,HttpServletRequest request) {
+			,BindingResult bindingResult,Model model) {
 		if (bindingResult.hasErrors()) {
 			if (order.getOrderDate()!=null) {
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 				Date date= java.sql.Date.valueOf(sdf.format(order.getOrderDate()));
 				order.setOrderDate(date);
 			}
-			request.setAttribute("order", order);
-			request.setAttribute("mode", "MODE_ADDORDER");
+			model.addAttribute("order", order);
+			model.addAttribute("location", "features/adduserorder.jsp");
 			return "welcomepage";
 		}
 		orderService.save(order);
-		request.setAttribute("orders", orderService.list());
-		request.setAttribute("mode", "MODE_LISTORDER");
+		model.addAttribute("orders", orderService.list());
+		model.addAttribute("location", "features/listuserorder.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/updateorder")
 	public String updateOrder(@Valid@ModelAttribute("order") UserOrder order
-			,BindingResult bindingResult,HttpServletRequest request) {
+			,BindingResult bindingResult,Model model) {
 		if (bindingResult.hasErrors()) {
 			if (order.getOrderDate()!=null) {
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 				Date date= java.sql.Date.valueOf(sdf.format(order.getOrderDate()));
 				order.setOrderDate(date);
 			}
-			request.setAttribute("order", order);
-			request.setAttribute("mode", "MODE_UPDATEORDER");
+			model.addAttribute("order", order);
+			model.addAttribute("location", "features/updateuserorder.jsp");
 			return "welcomepage";
 		}
 		orderService.update(order);
-		request.setAttribute("orders", orderService.list());
-		request.setAttribute("mode", "MODE_LISTORDER");
+		model.addAttribute("orders", orderService.list());
+		model.addAttribute("location", "features/listuserorder.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/delete")
-	public String deleteOrder(@RequestParam Long id,HttpServletRequest request) {
+	public String deleteOrder(@RequestParam Long id,Model model) {
 		orderService.delete(id);
-		request.setAttribute("orders", orderService.list());
-		request.setAttribute("mode", "MODE_LISTORDER");
+		model.addAttribute("orders", orderService.list());
+		model.addAttribute("location", "features/listuserorder.jsp");
 		return "welcomepage";
 	}
 	

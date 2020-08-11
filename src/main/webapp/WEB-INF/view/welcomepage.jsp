@@ -5,47 +5,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<title>Insert title here</title>
-<link rel="stylesheet" 
-href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/self/listuser.css">
-<link rel="stylesheet" href="/css/jquery/jquery-ui.min.css">
-<style type="text/css">
-.custom-container{max-width: unset;}
-.error-color{color:red}
-.custom-align{display: inline;}
-</style>
-<script src="/js/jquery/jquery-3.5.1.min.js"></script>
+<jsp:include page="welcomepage/header.jsp"></jsp:include>
 </head>
-<body style="background-color: white;
-	background:url(/img/database_bg.jpg);
-	opacity: 0.95;
-	z-index: -999;
-	background-position: center 0;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-	background-color: white;">
+<body>
 	
-<nav class="navbar navbar-expand-sm navbar-light bg-light" style="background-color: #e9ecef;">
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
   <a class="navbar-brand" href="/index">資料庫編輯系統</a>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent" "><%--隱藏按鈕 --%>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent"><%--隱藏按鈕 --%>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/mainpage">首頁 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/listuser">首頁 <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/register">新增用戶</a>
+        <a class="nav-link" href="/adduser">新增用戶</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/mainpage">所有用戶</a>
+        <a class="nav-link" href="/listuser">所有用戶</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/order/list">所有訂單</a>
@@ -61,7 +41,7 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   </div>
 </nav>
 
-<c:choose>
+<%--c:choose>
 <c:when test="${mode=='MODE_HOME' }"><jsp:include page="features/listuser.jsp"/></c:when>
 <c:when test="${mode=='MODE_REGISTER' }"><jsp:include page="features/adduser.jsp"/></c:when>
 <c:when test="${mode=='MODE_UPDATE' }"><jsp:include page="features/updateuser.jsp"/></c:when>
@@ -69,13 +49,9 @@ href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <c:when test="${mode=='MODE_ADDORDER' }"><jsp:include page="features/adduserorder.jsp"/></c:when>
 <c:when test="${mode=='MODE_LISTORDER' }"><jsp:include page="features/listuserorder.jsp"/></c:when>
 <c:when test="${mode=='MODE_UPDATEORDER' }"><jsp:include page="features/updateuserorder.jsp"/></c:when>
-</c:choose>
+</c:choose--%>
+<jsp:include page="${location }"></jsp:include>
 
-
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<%--script type="text/javascript">
-$(window).load(alert($(window).width()));
-</script--%>
+<jsp:include page="welcomepage/footer.jsp"></jsp:include>
 </body>
 </html>

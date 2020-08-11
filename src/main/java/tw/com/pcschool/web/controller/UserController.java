@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,85 +33,108 @@ public class UserController {
 	private UserService userService;
 	
 	@RequestMapping("/index")
-	public String index(HttpServletRequest request) {
-		request.setAttribute("mode", "MODE_INDEX");
+	public String index(Model model) {
+		model.addAttribute("location","features/welcome.jsp");
 		return "welcomepage";
 	}
 	
-	@RequestMapping("/mainpage")
-	public String welcome(HttpServletRequest request) {
-		request.setAttribute("users", userService.query());
-		request.setAttribute("mode", "MODE_HOME");
-		return "welcomepage";
-	}
-	
-	@RequestMapping("/register")
-	public String register(HttpServletRequest request) {
+	@RequestMapping("/adduser")
+	public String addUser(Model model) {
+		model.addAttribute("user", new User());
+		model.addAttribute("location","features/updateuser.jsp");
 		
-		request.setAttribute("user", new User());
-		request.setAttribute("mode", "MODE_REGISTER");
+		model.addAttribute("action","saveuser");
+		model.addAttribute("title","用戶註冊");
+		model.addAttribute("submit","註冊用戶");
 		return "welcomepage";
 	}
 	
-	@PostMapping("/update")
-	public String update(@RequestParam Long id,HttpServletRequest request) {
-		request.setAttribute("user", userService.get(id));
-		request.setAttribute("mode", "MODE_UPDATE");
+	@RequestMapping("/listuser")
+	public String welcome(Model model) {
+		model.addAttribute("users", userService.query());
+		model.addAttribute("location","features/listuser.jsp");
+		return "welcomepage";
+	}
+	
+//	@RequestMapping("/register")
+//	public String register(Model model) {
+//		model.addAttribute("user", new User());
+//		model.addAttribute("location","features/listuser.jsp");
+//		request.setAttribute("mode", "MODE_REGISTER");
+//		return "welcomepage";
+//	}
+	
+	@RequestMapping("/update")
+	public String update(@RequestParam Long id,Model model) {
+		model.addAttribute("user", userService.get(id));
+		model.addAttribute("location","features/updateuser.jsp");
+		
+		model.addAttribute("action","saveuser");
+		model.addAttribute("title","資料修改");
+		model.addAttribute("submit","修改資料");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/saveuser")
 	public String registerUser(@Valid@ModelAttribute("user") User user,
 			BindingResult bindingResult,
-			HttpServletRequest request) {
+			Model model) {
 		if (bindingResult.hasErrors()) {
 			if (user.getBirthday()!=null) {
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 				Date date= java.sql.Date.valueOf(sdf.format(user.getBirthday()));
 				user.setBirthday(date);
 			}
-			request.setAttribute("user", user);
-			request.setAttribute("mode", "MODE_REGISTER");
+			model.addAttribute("user", user);
+			model.addAttribute("location","features/updateuser.jsp");
+			
+			model.addAttribute("action","saveuser");
+			model.addAttribute("title","用戶註冊");
+			model.addAttribute("submit","註冊用戶");
 			return "welcomepage";
 		}
 		userService.add(user);
-		request.setAttribute("users", userService.query());
-		request.setAttribute("mode", "MODE_HOME");
+		model.addAttribute("users", userService.query());
+		model.addAttribute("location","features/listuser.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/updateuser")
-	public String updateUser(@Valid@ModelAttribute User user,BindingResult bindingResult,HttpServletRequest request) {
+	public String updateUser(@Valid@ModelAttribute User user,BindingResult bindingResult,Model model) {
 		if (bindingResult.hasErrors()) {
 			if (user.getBirthday()!=null) {
 				SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 				Date date= java.sql.Date.valueOf(sdf.format(user.getBirthday()));
 				user.setBirthday(date);
 			}
-			request.setAttribute("user", user);
-			request.setAttribute("mode", "MODE_UPDATE");
+			model.addAttribute("user", user);
+			model.addAttribute("location","features/updateuser.jsp");
+			
+			model.addAttribute("action","saveuser");
+			model.addAttribute("title","資料修改");
+			model.addAttribute("submit","修改資料");
 			return "welcomepage";
 		}
 		userService.update(user);
-		request.setAttribute("users", userService.query());
-		request.setAttribute("mode", "MODE_HOME");
+		model.addAttribute("users", userService.query());
+		model.addAttribute("location","features/listuser.jsp");
 		return "welcomepage";
 	}
 	
 	@PostMapping("/deleteuser")
 	public String deleteUser(@RequestParam Long id,@ModelAttribute User user,BindingResult bindingResult,
-			HttpServletRequest request)throws SQLIntegrityConstraintViolationException {
+			Model model)throws SQLIntegrityConstraintViolationException {
 		try {
 			userService.delete(id);
 		} catch (DataIntegrityViolationException e) {
-			request.setAttribute("deleteid", id);
-			request.setAttribute("foreignerror", "該使用者有訂單尚未刪除");
-			request.setAttribute("users", userService.query());
-			request.setAttribute("mode", "MODE_HOME");
+			model.addAttribute("deleteid", id);
+			model.addAttribute("foreignerror", "該使用者有訂單尚未刪除");
+			model.addAttribute("users", userService.query());
+			model.addAttribute("mode", "MODE_HOME");
 			return "welcomepage";
 		}
-		request.setAttribute("users", userService.query());
-		request.setAttribute("mode", "MODE_HOME");
+		model.addAttribute("users", userService.query());
+		model.addAttribute("location","features/listuser.jsp");
 		return "welcomepage";
 	}
 	

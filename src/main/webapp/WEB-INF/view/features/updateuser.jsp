@@ -2,14 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<div class="container text-center"
-	style="background-color: #e9ecef; padding: 0 0 100% 0; max-width: unset;">
+<script src="/js/jquery/jquery-ui.min.js"></script>
+<script src="/js/jquery/datepicker-zh-TW.js"></script>
+<div class="container text-center">
 	
-	<h3>資料修改</h3>
+	<h3>${title }</h3>
 
-	<div class="container" style="">
-		<form:form action="updateuser" method="post" modelAttribute="user"
-			class="form-horizontal">
+	<div class="container">
+		<form:form action="${action}" 
+		method="post" modelAttribute="user" class="form-horizontal">
 			
 			<input type="hidden" name="id" value="${user.id }">
 			<div class="row form-group">
@@ -64,7 +65,7 @@
 
 			<div class="row">
 				<div class="col">
-					<input class="btn btn-primary" type="submit" value="修改資料">
+					<input class="btn btn-primary" type="submit" value="${submit }">
 				</div>
 			</div>
 
@@ -72,6 +73,4 @@
 	</div>
 
 </div>
-<script src="/js/jquery/jquery-ui.min.js"></script>
 <script src="/js/self/datepicker.js"></script>
-<script src="/js/jquery/datepicker-zh-TW.js"></script>

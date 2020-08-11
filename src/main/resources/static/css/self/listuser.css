@@ -1,7 +1,19 @@
-/* @media(max-width:720px){
-	.table td{
+/*@media(max-width:960px){
+	.table tr{
 	display: flex;
 	flex-wrap: wrap;
 	}
-}
- */
+	.table tr th{
+	flex-direction:column;
+	width:calc(100%/6);
+	flex: 100%;
+	}
+	.table tr td{
+	text-align:center;
+	word-wrap:break-all;
+	width:calc(100%/6);
+	display:inline-flex;
+	flex: 100%;
+	border: 3px solid red;
+	}
+}*/
