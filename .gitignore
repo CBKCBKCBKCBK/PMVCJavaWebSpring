@@ -35,3 +35,6 @@ EncrypDES.java
 GenKey.java
 keygen.bin
 ReadDes.java
+Once.java
+ControllerUtil.java
+InfoAPI.java
